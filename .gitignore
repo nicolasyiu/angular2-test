@@ -8,3 +8,4 @@
 /app/main.js
 /app/main.js.map
 .sass-cache
+/npm-debug.log
