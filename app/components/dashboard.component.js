@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var hero_service_1 = require("./hero.service");
+var hero_service_1 = require("../models/services/hero.service");
 var DashboardComponent = (function () {
     function DashboardComponent(heroService) {
         this.heroService = heroService;
@@ -23,7 +23,8 @@ var DashboardComponent = (function () {
         core_1.Component({
             selector: 'my-dashboard',
             moduleId: module.id,
-            templateUrl: 'dashboard.component.html'
+            templateUrl: '../views/dashboard.component.html',
+            styleUrls: ['../assets/styles/dashboard.component.css']
         }), 
         __metadata('design:paramtypes', [hero_service_1.HeroService])
     ], DashboardComponent);
