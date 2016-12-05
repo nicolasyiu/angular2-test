@@ -12,7 +12,7 @@ var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 var common_1 = require('@angular/common');
 require('rxjs/add/operator/switchMap');
-var hero_service_1 = require('../models/services/hero.service');
+var hero_service_1 = require('../services/hero.service');
 var hero_1 = require('../models/hero');
 var HeroDetailComponent = (function () {
     function HeroDetailComponent(heroService, route, location) {

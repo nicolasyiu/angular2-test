@@ -5,7 +5,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router}            from '@angular/router';
 import {Observable}        from 'rxjs/Observable';
 import {Subject}           from 'rxjs/Subject';
-import {HeroSearchService} from '../models/services/hero-search.service';
+import {HeroSearchService} from '../services/hero-search.service';
 import {Hero} from '../models/hero';
 
 @Component({

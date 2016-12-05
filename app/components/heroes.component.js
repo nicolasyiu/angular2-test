@@ -10,7 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
-var hero_service_1 = require('../models/services/hero.service');
+var hero_service_1 = require('../services/hero.service');
 var HeroesComponent = (function () {
     function HeroesComponent(router, heroService) {
         this.router = router;
@@ -37,14 +37,18 @@ var HeroesComponent = (function () {
     };
     HeroesComponent.prototype.delete = function (hero) {
         var _this = this;
-        this.heroService
-            .delete(hero.id)
-            .then(function () {
-            _this.heroes = _this.heroes.filter(function (h) { return h !== hero; });
-            if (_this.selectedHero === hero) {
-                _this.selectedHero = null;
-            }
-        });
+        if (confirm("确定要删除吗？")) {
+            console.log('start delete');
+            this.heroService
+                .delete(hero.id)
+                .then(function () {
+                _this.heroes = _this.heroes.filter(function (h) { return h !== hero; });
+                if (_this.selectedHero === hero) {
+                    _this.selectedHero = null;
+                }
+                console.log('delete ok');
+            });
+        }
     };
     HeroesComponent.prototype.getHeroes = function () {
         var _this = this;

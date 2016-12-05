@@ -7,12 +7,12 @@ import {HttpModule} from '@angular/http';
 import {AppRoutingModule} from './app-routing.module';
 
 import {InMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './models/services/in-memory-data.service';
+import {InMemoryDataService} from './services/in-memory-data.service';
 
 import {AppComponent} from './components/app.component';
 import {HeroDetailComponent} from './components/hero-detail.component';
 import {HeroesComponent} from './components/heroes.component';
-import {HeroService} from './models/services/hero.service';
+import {HeroService} from './services/hero.service';
 import {DashboardComponent} from './components/dashboard.component';
 import {HeroSearchComponent} from './components/hero-search.component';
 

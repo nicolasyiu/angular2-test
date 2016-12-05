@@ -2,7 +2,7 @@ import {Component} from  '@angular/core';
 import {Router} from '@angular/router';
 import {OnInit} from '@angular/core';
 import {Hero} from '../models/hero';
-import {HeroService} from '../models/services/hero.service';
+import {HeroService} from '../services/hero.service';
 
 @Component({
     selector: 'my-heroes',
@@ -41,12 +41,16 @@ export class HeroesComponent implements OnInit {
     }
 
     delete(hero: Hero): void {
-        this.heroService
-            .delete(hero.id)
-            .then(() => {
-                this.heroes = this.heroes.filter(h => h !== hero);
-                if (this.selectedHero === hero) { this.selectedHero = null; }
-            });
+        if(confirm("确定要删除吗？")){
+            console.log('start delete');
+            this.heroService
+                .delete(hero.id)
+                .then(() => {
+                    this.heroes = this.heroes.filter(h => h !== hero);
+                    if (this.selectedHero === hero) { this.selectedHero = null; }
+                    console.log('delete ok');
+                });
+        }
     }
 
     getHeroes(): void {
