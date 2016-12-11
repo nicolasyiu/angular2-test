@@ -1,16 +1,23 @@
 import {Injectable} from '@angular/core';
 import {Hero} from '../models/hero';
-import {Headers, Http} from "@angular/http";
+import {Headers, Http, RequestOptions, RequestMethod, Request} from "@angular/http";
 
 import 'rxjs/add/operator/toPromise';
+import 'rxjs/Rx';
+import {DomSanitizer} from "@angular/platform-browser";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class HeroService {
     private heroesUrl = 'app/heroes';
-    private headers = new Headers({'Content-Type': 'application/json'});
+    private headers = new Headers({
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+    });
 
+    private randomQuote;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, private sanitizer: DomSanitizer) {
     }
 
     delete(id: number): Promise<void> {
@@ -20,13 +27,31 @@ export class HeroService {
             .then(() => null)
             .catch(this.handleError);
     }
+
     create(name: string): Promise<Hero> {
+
+        // var formdata = new FormData();
+        // formdata.append("name",name);
+        // formdata.append("type_id",1);
+        // formdata.append("type_name","生活");
+        // var formdata2 = new FormData();
+        // formdata2.append("test",[3,4,5,6]);
+        // formdata.append("xx",formdata2);
+        let options = new RequestOptions({
+            // body: JSON.stringify({name: name, type_id: 1, type_name: '旅游'}),
+            body: {name: name, type_id: 1, type_name: '旅游'},
+            // body:formdata.seialize(),
+            // body: "name="+name+"&type_id=1&type_name=" + encodeURI('旅游'),
+            headers: new Headers({'Content-Type':'application/x-www-form-urlencoded'}),
+            method: 'post'
+        });
         return this.http
-            .post(this.heroesUrl, JSON.stringify({name: name}), {headers: this.headers})
+            .post('http://139.129.205.61/v1/tags',null,options)
             .toPromise()
-            .then(res => res.json().data)
+            .then(res => res.json())
             .catch(this.handleError);
     }
+
     update(hero: Hero): Promise<Hero> {
         const url = `${this.heroesUrl}/${hero.id}`;
         return this.http
@@ -37,9 +62,15 @@ export class HeroService {
     }
 
     getHeroes(): Promise<Hero[]> {
-        return this.http.get(this.heroesUrl).toPromise()
-            .then(response => response.json().data as Hero[])
+        return this.http.get('http://139.129.205.61/v1/tags')
+            .toPromise()
+            .then(response => response.json() as Hero[])
             .catch(this.handleError);
+    }
+
+
+    logError(err) {
+        console.error('There was an error: ' + err);
     }
 
     getHeroesSlowly(): Promise<Hero[]> {
